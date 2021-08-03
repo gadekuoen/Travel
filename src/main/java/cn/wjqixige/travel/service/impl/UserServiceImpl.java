@@ -4,8 +4,8 @@ import cn.wjqixige.travel.dao.UserDao;
 import cn.wjqixige.travel.dao.impl.UserDaoImpl;
 import cn.wjqixige.travel.domain.User;
 import cn.wjqixige.travel.service.UserService;
-import cn.wjqixige.travel.until.MailUtils;
-import cn.wjqixige.travel.until.UuidUtil;
+import cn.wjqixige.travel.utils.MailUtils;
+import cn.wjqixige.travel.utils.UuidUtil;
 
 public class UserServiceImpl implements UserService {
 
@@ -32,18 +32,25 @@ public class UserServiceImpl implements UserService {
         userDao.save(user);
 
         //3. 激活邮件发送
-        String content = "<a href='http://localhost/travel/activeUserServlet?code=" + user.getCode() + "'>点击激活【旅游网】</a>";
+        String content = "<a href='http://localhost:8080/user/active?code=" + user.getCode() + "'>点击激活【旅游网】</a>";
         MailUtils.sendMail(user.getEmail(),content,"激活邮件");
         return true;
     }
 
     @Override
     public boolean active(String code) {
-        return false;
+        //1.根据激活码查询用户对象
+        User user = userDao.findByCode(code);
+        if (user != null){
+            userDao.updateStatus(user);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
     public User login(User user) {
-        return null;
+        return userDao.findByUsernameAndPassword(user.getUsername(), user.getPassword());
     }
 }

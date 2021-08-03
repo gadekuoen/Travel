@@ -98,9 +98,15 @@ $(function(){
             && checkName()
             && checkTelephone()
             && checkBirthday()){
-            $.post("registUserServlet",$(this).serialize(),function(data){
-                console.log(data);
-                alert(data);
+            $.post("user/regist",$(this).serialize(),function(data){
+                if(data.flag){
+                    //注册成功，跳转成功页面
+                    location.href="register_ok.html";
+                }else{
+                    //注册失败,给errorMsg添加提示信息
+                    $("#errorMsg").html(data.errorMsg);
+
+                }
             });
         }
 

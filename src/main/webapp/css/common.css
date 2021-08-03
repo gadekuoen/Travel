@@ -93,8 +93,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .login {
-    width: 205px;
+    width: 220px;
     font-size: 12px;
+    display: none;
 }
 .login a{
     font-size: 12px;
@@ -107,7 +108,7 @@ h1, h2, h3, h4, h5, h6 {
 .login_out a {
     color: #000;
     font-size: 12px;
-    margin: 0 10px;
+    margin: 0 5px;
 }
 
 .header_wrap {

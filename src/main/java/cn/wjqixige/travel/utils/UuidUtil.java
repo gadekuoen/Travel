@@ -1,4 +1,4 @@
-package cn.wjqixige.travel.until;
+package cn.wjqixige.travel.utils;
 
 import java.util.UUID;
 
